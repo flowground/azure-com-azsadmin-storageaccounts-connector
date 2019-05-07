@@ -1,0 +1,101 @@
+{
+    "title": "StorageManagementClient",
+    "description": "The Admin Storage Management Client.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/azsadmin-storageaccounts/2015-12-01-preview/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://adminmanagement.local.azurestack.external/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Authorization uses an Azure Active Directory OAuth2 flow.",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "StorageAccounts_List": {
+            "main": "./lib/actions/StorageAccounts_List.js",
+            "title": "Returns a list of storage accounts.",
+            "description": "Returns a list of storage accounts.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/StorageAccounts_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "StorageAccounts_Get": {
+            "main": "./lib/actions/StorageAccounts_Get.js",
+            "title": "Returns the requested storage account.",
+            "description": "Returns the requested storage account.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/StorageAccounts_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "StorageAccounts_Undelete": {
+            "main": "./lib/actions/StorageAccounts_Undelete.js",
+            "title": "Undelete a deleted storage account.",
+            "description": "Undelete a deleted storage account.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/StorageAccounts_Undelete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
